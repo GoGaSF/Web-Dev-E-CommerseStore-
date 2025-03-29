@@ -1,11 +1,14 @@
 # Web-Dev-E-CommerseStore-
 🛒 E-Commerce Store
+
 📌 Description
+
 E-Commerce Store is a web application for online shopping, where users can browse products, add them to the cart, and place orders. Administrators can manage products and view orders.
 
 
 🔧 Features
 For Users:
+
 Browse the product catalog
 
 Filter by category and price
@@ -20,6 +23,7 @@ View order history
 
 
 For Administrators:
+
 Manage products (add, edit, delete)
 
 View user orders
@@ -29,6 +33,7 @@ Admin panel
 
 
 🏗 Technologies
+
 Frontend: Angular, Typescript, CSS
 
 Backend: Django
@@ -40,6 +45,7 @@ Authentication: JWT
 
 
 👥 Development Team
+
 Name 1 – Ademay
 
 Name 2 – Rasul
