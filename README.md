@@ -29,11 +29,11 @@ Admin panel
 
 
 🏗 Technologies
-Frontend: Angular, TypeScript, SCSS
+Frontend: Angular, Typescript, CSS
 
-Backend: (specify if used, e.g., Node.js + Express)
+Backend: Django
 
-Database: (e.g., PostgreSQL, MongoDB, Firebase)
+Database: SQLite
 
 Authentication: JWT
 
@@ -44,4 +44,4 @@ Name 1 – Ademay
 
 Name 2 – Rasul
 
-Name 3 – Ertay
+Name 3 – Yertay
