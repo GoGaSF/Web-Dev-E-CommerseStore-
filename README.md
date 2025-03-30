@@ -1,4 +1,4 @@
-# Web-Dev-E-CommerseStore-
+# Web-Dev-E-CommerceStore-
 🛒 E-Commerce Store
 
 📌 Description
