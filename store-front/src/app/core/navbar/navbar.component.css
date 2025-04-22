@@ -1,0 +1,53 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #eee;
+    height: 80px;
+  }
+  
+  .logo {
+    border: 2px solid #000;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    margin-right: auto;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    padding: 0 1rem;
+  }
+  
+  .nav-links a:not(:last-child)::after {
+    content: "";
+    height: 60%;
+    width: 1px;
+    background-color: #000;
+    position: absolute;
+    right: -1rem;
+    top: 20%;
+  }
+  
+  .actions {
+    margin-left: 2rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .active {
+    font-weight: bold;
+  }

@@ -1,15 +1,21 @@
 <app-slideshow></app-slideshow>
 
-<section class="collections">
-  <div class="men-collection">
-    <h2>Men Collection</h2>
-    <app-collection-slider></app-collection-slider>
-  </div>
-  
-  <div class="women-collection">
-    <h2>Women Collection</h2>
-    <app-collection-slider></app-collection-slider>
-  </div>
-</section>
+<app-collection-slider 
+  [title]="'Women'" 
+  [products]="womenProducts">
+</app-collection-slider>
 
-<app-collaborations></app-collaborations>
+<app-collection-slider 
+  [title]="'Men'" 
+  [products]="menProducts">
+</app-collection-slider>
+
+<div class="collaborations">
+  <h2>Collaborations</h2>
+  <div class="brands-grid">
+    <div class="brand" *ngFor="let brand of brands">
+      <img [src]="brand.logoUrl" [alt]="brand.name">
+      <p>{{ brand.name }}</p>
+    </div>
+  </div>
+</div>

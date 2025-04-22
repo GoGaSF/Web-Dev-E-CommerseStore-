@@ -1,1 +1,25 @@
-<p>collection-slider works!</p>
+<div class="collection-container">
+    <h2>{{ title }} new collection</h2>
+    
+    <div class="slider-container">
+      <button class="arrow left-arrow" (click)="scrollLeft()">
+        <span>&#10094;</span>
+      </button>
+      
+      <div class="slider" #sliderElement>
+        <div class="product-card" *ngFor="let product of products">
+          <div class="product-image">
+            <img [src]="product.imageUrl" [alt]="product.name">
+          </div>
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="price">{{ product.price | currency }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="arrow right-arrow" (click)="scrollRight()">
+        <span>&#10095;</span>
+      </button>
+    </div>
+  </div>

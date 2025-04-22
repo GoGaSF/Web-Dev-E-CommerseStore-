@@ -1,1 +1,29 @@
-<p>slideshow works!</p>
+<div class="slideshow-container">
+    <div class="slide" *ngIf="currentSlide === 0">
+      <img src="assets/slide1.jpg" alt="Slideshow image 1">
+      <div class="slide-content">
+        <h2>New Collection</h2>
+        <p>Discover the latest trends</p>
+        <button class="shop-now">Shop Now</button>
+      </div>
+    </div>
+    <div class="slide" *ngIf="currentSlide === 1">
+      <img src="assets/slide2.jpg" alt="Slideshow image 2">
+      <div class="slide-content">
+        <h2>Summer Special</h2>
+        <p>Get ready for the season</p>
+        <button class="shop-now">Shop Now</button>
+      </div>
+    </div>
+    <div class="slide" *ngIf="currentSlide === 2">
+      <img src="assets/slide3.jpg" alt="Slideshow image 3">
+      <div class="slide-content">
+        <h2>Exclusive Brands</h2>
+        <p>Premium quality for you</p>
+        <button class="shop-now">Shop Now</button>
+      </div>
+    </div>
+    
+    <button class="prev" (click)="prevSlide()">&#10094;</button>
+    <button class="next" (click)="nextSlide()">&#10095;</button>
+  </div>
