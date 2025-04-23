@@ -1,0 +1,72 @@
+
+<div class="main-container">
+    <div class="breadcrumb">
+        <a routerLink="/">Home</a> /
+        <a routerLink="/men">Female</a> /
+        <a routerLink="/men/accessories">Accessories</a>
+      </div>
+      
+      <h1 class="page-title">Women's ACCESSORIES</h1>
+      
+      <div class="container">
+        <div class="filters">
+          <!-- Price Filter -->
+          <div class="filter-section">
+            <h3 class="filter-title">PRICE</h3>
+            <div class="price-range">
+              <input type="number" [(ngModel)]="selectedMinPrice" (change)="applyFilters()"> —
+              <input type="number" [(ngModel)]="selectedMaxPrice" (change)="applyFilters()">
+            </div>
+          </div>
+      
+          <!-- Brand Filter -->
+          <div class="filter-section">
+            <h3 class="filter-title">BRAND</h3>
+            <div class="brand-filters">
+              <div *ngFor="let brand of brands" class="brand-checkbox">
+                <input type="checkbox" [id]="brand" 
+                       [checked]="selectedBrands.includes(brand)" 
+                       (change)="toggleBrandFilter(brand)">
+                <label [for]="brand">{{ brand }}</label>
+              </div>
+            </div>
+          </div>
+      
+          <div class="filter-buttons">
+            <button class="apply-btn" (click)="applyFilters()">Apply</button>
+            <button class="reset-btn" (click)="resetFilters()">Reset</button>
+          </div>
+        </div>
+      
+        <div class="products-container">
+          <div class="sorting">
+            <div class="sort-dropdown">
+              <button (click)="toggleSortOptions()" class="sort-button">
+                {{ getSortLabel() }}
+                <span class="arrow-down">▼</span>
+              </button>
+              <div class="sort-options" *ngIf="showSortOptions">
+                <div class="sort-option" (click)="sortProducts('featured')">Featured</div>
+                <div class="sort-option" (click)="sortProducts('price-asc')">Price: Low to High</div>
+                <div class="sort-option" (click)="sortProducts('price-desc')">Price: High to Low</div>
+                <div class="sort-option" (click)="sortProducts('name-asc')">Name: A to Z</div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="products-grid">
+            <div *ngFor="let product of filteredProducts" class="product-card">
+              <div class="product-image">
+                <img [src]="product.image" [alt]="product.name">
+                <button class="wishlist-btn">♡</button>
+              </div>
+              <div class="product-info">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <div class="product-colors">{{ product.colors }} Color{{ product.colors !== 1 ? 's' : '' }}</div>
+                <div class="product-price">{{ product.price | number }}₮</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
