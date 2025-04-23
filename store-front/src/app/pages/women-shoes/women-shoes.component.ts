@@ -49,7 +49,7 @@ export class WomenShoesComponent {
         id: 1, 
         name: 'CLASSIC LEATHER OXFORDS', 
         brand: 'CLARKS', 
-        price: , 
+        price: 23443, 
         sizes: [39, 40, 41, 42, 43, 44], 
         image: '', 
         colors: 2 
@@ -58,7 +58,7 @@ export class WomenShoesComponent {
         id: 2, 
         name: 'URBAN SNEAKERS', 
         brand: 'NIKE', 
-        price: , 
+        price: 23423, 
         sizes: [40, 41, 42, 43, 44, 45], 
         image: '', 
         colors: 3 
@@ -67,7 +67,7 @@ export class WomenShoesComponent {
         id: 3, 
         name: 'RUNNING SHOES PRO', 
         brand: 'ADIDAS', 
-        price: , 
+        price: 45646, 
         sizes: [38, 39, 40, 41, 42, 43, 44], 
         image: '', 
         colors: 4 
@@ -76,7 +76,7 @@ export class WomenShoesComponent {
         id: 4, 
         name: 'CASUAL LOAFERS', 
         brand: 'TOMMY HILFIGER', 
-        price: , 
+        price: 5677, 
         sizes: [40, 41, 42, 43, 44], 
         image: '', 
         colors: 1 
@@ -85,7 +85,7 @@ export class WomenShoesComponent {
         id: 5, 
         name: 'BUSINESS FORMAL SHOES', 
         brand: 'HUGO BOSS', 
-        price: , 
+        price: 12323, 
         sizes: [39, 40, 41, 42, 43, 44, 45], 
         image: '', 
         colors: 2 
@@ -94,7 +94,7 @@ export class WomenShoesComponent {
         id: 6, 
         name: 'ATHLETIC TRAINERS', 
         brand: 'PUMA', 
-        price: , 
+        price: 45675, 
         sizes: [37, 38, 39, 40, 41, 42, 43, 44, 45, 46], 
         image: '', 
         colors: 5 
@@ -103,7 +103,7 @@ export class WomenShoesComponent {
         id: 7, 
         name: 'HIKING BOOTS', 
         brand: 'TIMBERLAND', 
-        price: , 
+        price: 12323, 
         sizes: [40, 41, 42, 43, 44, 45, 46], 
         image: '', 
         colors: 2 
@@ -112,7 +112,7 @@ export class WomenShoesComponent {
         id: 8, 
         name: 'LEATHER CHELSEA BOOTS', 
         brand: 'DR. MARTENS', 
-        price: , 
+        price: 23444, 
         sizes: [39, 40, 41, 42, 43, 44], 
         image: '', 
         colors: 1 
@@ -121,7 +121,7 @@ export class WomenShoesComponent {
         id: 9, 
         name: 'SKATEBOARDING SHOES', 
         brand: 'VANS', 
-        price: , 
+        price: 1222, 
         sizes: [38, 39, 40, 41, 42, 43, 44, 45], 
         image: '', 
         colors: 3 

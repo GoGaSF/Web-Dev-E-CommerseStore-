@@ -35,12 +35,12 @@ export class WomenAccessoriesComponent {
   ngOnInit() {
     // Mock data - in a real app this would come from a service
     this.products = [
-      { id: 1, name: 'THOM BROWNE TIE', brand: 'THOM BROWNE', price: , image: '', colors: 1 },
-      { id: 2, name: 'PURPLE LABEL RALPH LAUREN BOW TIE', brand: 'RALPH LAUREN', price: , image: '', colors: 1 },
-      { id: 3, name: 'POLO RALPH LAUREN TIE', brand: 'RALPH LAUREN', price: , image: '', colors: 2 },
-      { id: 4, name: 'BLACK BOW TIE', brand: 'GUCCI', price: , image: '', colors: 1 },
-      { id: 5, name: 'NAVY BOW TIE', brand: 'ARMANI', price: , image: '', colors: 2 },
-      { id: 6, name: 'PATTERNED TIE', brand: 'BURBERRY', price: , image: '', colors: 1 }
+      { id: 1, name: 'THOM BROWNE TIE', brand: 'THOM BROWNE', price: 234, image: '', colors: 1 },
+      { id: 2, name: 'PURPLE LABEL RALPH LAUREN BOW TIE', brand: 'RALPH LAUREN', price: 3455, image: '', colors: 1 },
+      { id: 3, name: 'POLO RALPH LAUREN TIE', brand: 'RALPH LAUREN', price: 345, image: '', colors: 2 },
+      { id: 4, name: 'BLACK BOW TIE', brand: 'GUCCI', price: 5756, image: '', colors: 1 },
+      { id: 5, name: 'NAVY BOW TIE', brand: 'ARMANI', price: 867, image: '', colors: 2 },
+      { id: 6, name: 'PATTERNED TIE', brand: 'BURBERRY', price: 2333, image: '', colors: 1 }
     ];
 
     // Get unique brands for filter

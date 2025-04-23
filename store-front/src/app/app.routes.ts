@@ -5,6 +5,9 @@ import { WomenComponent } from './pages/women/women.component';
 import { MenAccessoriesComponent } from './pages/men-accessories/men-accessories.component';
 import { MenShoesComponent } from './pages/men-shoes/men-shoes.component';
 import { MenClothComponent } from './pages/men-cloth/men-cloth.component';
+import { WomenAccessoriesComponent } from './pages/women-accessories/women-accessories.component';
+import { WomenShoesComponent } from './pages/women-shoes/women-shoes.component';
+import { WomenClothComponent } from './pages/women-cloth/women-cloth.component';
 
 
 
@@ -16,5 +19,8 @@ export const routes: Routes = [
     {path: 'men/shoes', component: MenShoesComponent},
     {path: 'men/cloth', component: MenClothComponent},
     { path: 'women', component: WomenComponent },
+    {path: 'women/accessories', component: WomenAccessoriesComponent},
+    {path: 'women/shoes', component: WomenShoesComponent},
+    {path: 'women/cloth', component: WomenClothComponent},
     { path: '**', redirectTo: '' },
 ];
