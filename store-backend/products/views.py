@@ -1,8 +1,8 @@
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from .models import Product, Shoe, Clothing, Brand
 from .serializers import ProductSerializer, ShoeSerializer, ClothingSerializer
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework import status
 
 
@@ -82,3 +82,63 @@ def brand_list(request):
     
     brands = Brand.objects.values_list('name', flat=True).order_by('name')
     return Response(list(brands))
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    def create(self, request, *args, **kwargs):
+        sizes = request.data.pop('sizes', [])
+        serializer = self.get_serializer(data=request.data, context={'sizes': sizes})
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+    def update(self, request, *args, **kwargs):
+        sizes = request.data.pop('sizes', [])
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(
+            instance, 
+            data=request.data, 
+            partial=partial, 
+            context={'sizes': sizes}
+        )
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def filter(self, request):
+        """Custom endpoint to filter products"""
+        queryset = self.get_queryset()
+        
+        # Brand filter
+        brands = request.query_params.getlist('brand', [])
+        if brands:
+            queryset = queryset.filter(brand__in=brands)
+        
+        # Price range filter
+        min_price = request.query_params.get('min_price')
+        max_price = request.query_params.get('max_price')
+        
+        if min_price is not None:
+            queryset = queryset.filter(price__gte=min_price)
+        if max_price is not None:
+            queryset = queryset.filter(price__lte=max_price)
+        
+        # Size filter
+        sizes = request.query_params.getlist('size', [])
+        if sizes:
+            queryset = queryset.filter(sizes__size__in=sizes).distinct()
+        
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def brands(self, request):
+        """Get list of all unique brands"""
+        brands = Product.objects.values_list('brand', flat=True).distinct()
+        return Response(list(brands))

@@ -40,10 +40,10 @@ export class WomenShoesComponent {
   sortBy: string = 'featured';
 
   ngOnInit() {
-    // Generate available sizes from 37 to 50
+    
     this.availableSizes = Array.from({length: 14}, (_, i) => i + 37);
     
-    // Mock data - in a real app this would come from a service
+    
     this.products = [
       { 
         id: 1, 
