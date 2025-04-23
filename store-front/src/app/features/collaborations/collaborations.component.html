@@ -1,1 +1,8 @@
-<p>collaborations works!</p>
+<div class="collaborations">
+    <h2>Collaborations</h2>
+    <div class="brands-grid">
+      <div class="brand" *ngFor="let brand of brands">
+        <img [src]="brand.logoUrl" [alt]="brand.name">
+        <p>{{ brand.name }}</p>
+    </div>
+</div>

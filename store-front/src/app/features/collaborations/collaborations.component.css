@@ -1,0 +1,23 @@
+.collaborations {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .brand img {
+    max-width: 100px;
+    max-height: 50px;
+    object-fit: contain;
+  }
