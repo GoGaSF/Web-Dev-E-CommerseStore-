@@ -1,74 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { ApiService, Product } from '../../api.service';
-
-
-
+import { ProductService, Product } from '../../services/men-product-service.service';
 
 @Component({
   selector: 'app-men-accessories',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './men-accessories.component.html',
-  styleUrl: './men-accessories.component.css'
+  styleUrls: ['./men-accessories.component.css']
 })
-export class MenAccessoriesComponent implements OnInit{
+export class MenAccessoriesComponent implements OnInit {
   products: Product[] = [];
-  filteredProducts: Product[] = [];
-  brands: string[] = [];
-  selectedBrands: string[] = [];
-  minPrice: number = 0;
-  maxPrice: number = 5000000;
-  selectedMinPrice: number = 0;
-  selectedMaxPrice: number = 5000000;
-  showSortOptions: boolean = false;
+  showSortOptions = false;
   sortBy: string = 'featured';
-  isLoading: boolean = false;
-  error: string | null = null;
 
-  constructor(private apiService: ApiService){}
+  constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.isLoading = true;
-    
-    // Load products
-    this.apiService.getProducts('accessories').subscribe({
+    this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
-        this.filteredProducts = [...data];
-        this.isLoading = false;
+        this.sortProducts(this.sortBy);
       },
-      error: (err) => {
-        this.error = 'Failed to load products. Please try again later.';
-        this.isLoading = false;
-        console.error('Error loading products:', err);
+      error: (error) => {
+        console.error('Error fetching products:', error);
+        // Fallback to sample data in case of API error
+        this.loadFallbackData();
       }
     });
+  }
 
-    // Load brands for filter
-    this.apiService.getBrands().subscribe({
-      next: (brands) => {
-        this.brands = brands;
-      },
-      error: (err) => {
-        console.error('Error loading brands:', err);
-      }
-    });
-
-    // Load price range
-    this.apiService.getPriceRange().subscribe({
-      next: (range) => {
-        this.minPrice = range.min;
-        this.maxPrice = range.max;
-        this.selectedMinPrice = range.min;
-        this.selectedMaxPrice = range.max;
-      },
-      error: (err) => {
-        console.error('Error loading price range:', err);
-      }
-    });
+  // Fallback method to load sample data if API fails
+  loadFallbackData() {
+    this.products = [
+      { id: 1, name: 'THOM BROWNE TIE', brand: 'THOM BROWNE', price: 118000, image: 'assets/images/tie-1.jpg', colors: 1 },
+      { id: 2, name: 'PURPLE LABEL RALPH LAUREN BOW TIE', brand: 'RALPH LAUREN', price: 96000, image: 'assets/images/bow-tie-1.jpg', colors: 1 },
+      { id: 3, name: 'POLO RALPH LAUREN TIE', brand: 'RALPH LAUREN', price: 85000, image: 'assets/images/tie-2.jpg', colors: 2 },
+      { id: 4, name: 'BLACK BOW TIE', brand: 'GUCCI', price: 110000, image: 'assets/images/bow-tie-2.jpg', colors: 1 },
+      { id: 5, name: 'NAVY BOW TIE', brand: 'ARMANI', price: 92000, image: 'assets/images/bow-tie-3.jpg', colors: 2 },
+      { id: 6, name: 'PATTERNED TIE', brand: 'BURBERRY', price: 105000, image: 'assets/images/tie-3.jpg', colors: 1 }
+    ];
+    this.sortProducts(this.sortBy);
   }
 
   toggleSortOptions() {
@@ -78,49 +51,25 @@ export class MenAccessoriesComponent implements OnInit{
   sortProducts(sortType: string) {
     this.sortBy = sortType;
     this.showSortOptions = false;
-    this.applyFilters();
-  }
-
-  toggleBrandFilter(brand: string) {
-    if (this.selectedBrands.includes(brand)) {
-      this.selectedBrands = this.selectedBrands.filter(b => b !== brand);
-    } else {
-      this.selectedBrands.push(brand);
+    switch (sortType) {
+      case 'price-asc':
+        this.products.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-desc':
+        this.products.sort((a, b) => b.price - a.price);
+        break;
+      case 'name-asc':
+        this.products.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'featured':
+      default:
+        this.products.sort((a, b) => a.id - b.id);
+        break;
     }
-    this.applyFilters();
-  }
-
-  applyFilters() {
-    this.isLoading = true;
-    
-    this.apiService.filterProducts({
-      brands: this.selectedBrands.length > 0 ? this.selectedBrands : undefined,
-      minPrice: this.selectedMinPrice,
-      maxPrice: this.selectedMaxPrice,
-      sortBy: this.sortBy
-    }).subscribe({
-      next: (filtered) => {
-        this.filteredProducts = filtered;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.error = 'Failed to filter products. Please try again later.';
-        this.isLoading = false;
-        console.error('Error filtering products:', err);
-      }
-    });
-  }
-
-  resetFilters() {
-    this.selectedBrands = [];
-    this.selectedMinPrice = this.minPrice;
-    this.selectedMaxPrice = this.maxPrice;
-    this.sortBy = 'featured';
-    this.applyFilters();
   }
 
   getSortLabel(): string {
-    switch(this.sortBy) {
+    switch (this.sortBy) {
       case 'price-asc': return 'Price: Low to High';
       case 'price-desc': return 'Price: High to Low';
       case 'name-asc': return 'Name: A to Z';

@@ -1,0 +1,68 @@
+[
+    {
+      "model": "products.product",
+      "pk": 1,
+      "fields": {
+        "name": "THOM BROWNE TIE",
+        "brand": "THOM BROWNE",
+        "price": 118000,
+        "image": "assets/images/tie-1.jpg",
+        "colors": 1
+      }
+    },
+    {
+      "model": "products.product",
+      "pk": 2,
+      "fields": {
+        "name": "PURPLE LABEL RALPH LAUREN BOW TIE",
+        "brand": "RALPH LAUREN",
+        "price": 96000,
+        "image": "assets/images/bow-tie-1.jpg",
+        "colors": 1
+      }
+    },
+    {
+      "model": "products.product",
+      "pk": 3,
+      "fields": {
+        "name": "POLO RALPH LAUREN TIE",
+        "brand": "RALPH LAUREN",
+        "price": 85000,
+        "image": "assets/images/tie-2.jpg",
+        "colors": 2
+      }
+    },
+    {
+      "model": "products.product",
+      "pk": 4,
+      "fields": {
+        "name": "BLACK BOW TIE",
+        "brand": "GUCCI",
+        "price": 110000,
+        "image": "assets/images/bow-tie-2.jpg",
+        "colors": 1
+      }
+    },
+    {
+      "model": "products.product",
+      "pk": 5,
+      "fields": {
+        "name": "NAVY BOW TIE",
+        "brand": "ARMANI",
+        "price": 92000,
+        "image": "assets/images/bow-tie-3.jpg",
+        "colors": 2
+      }
+    },
+    {
+      "model": "products.product",
+      "pk": 6,
+      "fields": {
+        "name": "PATTERNED TIE",
+        "brand": "BURBERRY",
+        "price": 105000,
+        "image": "assets/images/tie-3.jpg",
+        "colors": 1
+      }
+    }
+]

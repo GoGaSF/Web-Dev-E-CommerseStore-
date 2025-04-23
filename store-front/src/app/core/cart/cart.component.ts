@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-cart',
@@ -7,8 +10,8 @@ import { Component } from '@angular/core';
 })
 export class CartComponent {
   cartItems = [
-    { name: , price: , quantity: 1 },
-    { name: , price: , quantity: 2 }
+    { name: 'something1', price: 10, quantity: 1 },
+    { name: 'something2', price: 20, quantity: 2 }
   ];
 
   getTotal() {

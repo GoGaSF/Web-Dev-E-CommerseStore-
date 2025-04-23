@@ -49,7 +49,7 @@ export class WomenClothComponent {
   sortBy: string = 'featured';
 
   ngOnInit() {
-    // Mock data - in a real app this would come from a service
+
     this.products = [
       { 
         id: 1, 
