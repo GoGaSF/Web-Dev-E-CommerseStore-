@@ -14,4 +14,5 @@ export class NavbarComponent {
     // Implement search toggle functionality
     console.log('Search toggled');
   }
+  
 }

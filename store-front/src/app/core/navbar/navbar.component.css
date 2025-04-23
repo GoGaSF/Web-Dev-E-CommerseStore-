@@ -47,7 +47,15 @@
     border: none;
     cursor: pointer;
   }
-  
+    /* .icon-image {
+      width: 20px;
+      height: 20px;
+    } */
+  .custom-size {
+    font-size: 24px;
+  }
+
+
   .active {
     font-weight: bold;
   }
