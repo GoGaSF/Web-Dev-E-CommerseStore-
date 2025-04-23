@@ -2,15 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ApiService, Product } from '../../api.service';
 
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  price: number;
-  image: string;
-  colors: number;
-}
+
 
 
 @Component({
@@ -20,7 +14,7 @@ interface Product {
   templateUrl: './men-accessories.component.html',
   styleUrl: './men-accessories.component.css'
 })
-export class MenAccessoriesComponent {
+export class MenAccessoriesComponent implements OnInit{
   products: Product[] = [];
   filteredProducts: Product[] = [];
   brands: string[] = [];
@@ -31,23 +25,50 @@ export class MenAccessoriesComponent {
   selectedMaxPrice: number = 5000000;
   showSortOptions: boolean = false;
   sortBy: string = 'featured';
+  isLoading: boolean = false;
+  error: string | null = null;
+
+  constructor(private apiService: ApiService){}
 
   ngOnInit() {
-    // Mock data - in a real app this would come from a service
-    this.products = [
-      { id: 1, name: 'THOM BROWNE TIE', brand: 'THOM BROWNE', price: 118000, image: 'assets/images/tie-1.jpg', colors: 1 },
-      { id: 2, name: 'PURPLE LABEL RALPH LAUREN BOW TIE', brand: 'RALPH LAUREN', price: 96000, image: 'assets/images/bow-tie-1.jpg', colors: 1 },
-      { id: 3, name: 'POLO RALPH LAUREN TIE', brand: 'RALPH LAUREN', price: 85000, image: 'assets/images/tie-2.jpg', colors: 2 },
-      { id: 4, name: 'BLACK BOW TIE', brand: 'GUCCI', price: 110000, image: 'assets/images/bow-tie-2.jpg', colors: 1 },
-      { id: 5, name: 'NAVY BOW TIE', brand: 'ARMANI', price: 92000, image: 'assets/images/bow-tie-3.jpg', colors: 2 },
-      { id: 6, name: 'PATTERNED TIE', brand: 'BURBERRY', price: 105000, image: 'assets/images/tie-3.jpg', colors: 1 }
-    ];
-
-    // Get unique brands for filter
-    this.brands = [...new Set(this.products.map(product => product.brand))];
+    this.isLoading = true;
     
-    // Initialize filtered products
-    this.applyFilters();
+    // Load products
+    this.apiService.getProducts('accessories').subscribe({
+      next: (data) => {
+        this.products = data;
+        this.filteredProducts = [...data];
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load products. Please try again later.';
+        this.isLoading = false;
+        console.error('Error loading products:', err);
+      }
+    });
+
+    // Load brands for filter
+    this.apiService.getBrands().subscribe({
+      next: (brands) => {
+        this.brands = brands;
+      },
+      error: (err) => {
+        console.error('Error loading brands:', err);
+      }
+    });
+
+    // Load price range
+    this.apiService.getPriceRange().subscribe({
+      next: (range) => {
+        this.minPrice = range.min;
+        this.maxPrice = range.max;
+        this.selectedMinPrice = range.min;
+        this.selectedMaxPrice = range.max;
+      },
+      error: (err) => {
+        console.error('Error loading price range:', err);
+      }
+    });
   }
 
   toggleSortOptions() {
@@ -57,23 +78,7 @@ export class MenAccessoriesComponent {
   sortProducts(sortType: string) {
     this.sortBy = sortType;
     this.showSortOptions = false;
-    
-    switch(sortType) {
-      case 'price-asc':
-        this.filteredProducts.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        this.filteredProducts.sort((a, b) => b.price - a.price);
-        break;
-      case 'name-asc':
-        this.filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'featured':
-      default:
-        // Default sorting (could be by id or another property)
-        this.filteredProducts.sort((a, b) => a.id - b.id);
-        break;
-    }
+    this.applyFilters();
   }
 
   toggleBrandFilter(brand: string) {
@@ -86,24 +91,31 @@ export class MenAccessoriesComponent {
   }
 
   applyFilters() {
-    this.filteredProducts = this.products.filter(product => {
-      // Filter by brand if any are selected
-      const brandMatch = this.selectedBrands.length === 0 || this.selectedBrands.includes(product.brand);
-      
-      // Filter by price range
-      const priceMatch = product.price >= this.selectedMinPrice && product.price <= this.selectedMaxPrice;
-      
-      return brandMatch && priceMatch;
-    });
+    this.isLoading = true;
     
-    // Apply current sorting
-    this.sortProducts(this.sortBy);
+    this.apiService.filterProducts({
+      brands: this.selectedBrands.length > 0 ? this.selectedBrands : undefined,
+      minPrice: this.selectedMinPrice,
+      maxPrice: this.selectedMaxPrice,
+      sortBy: this.sortBy
+    }).subscribe({
+      next: (filtered) => {
+        this.filteredProducts = filtered;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to filter products. Please try again later.';
+        this.isLoading = false;
+        console.error('Error filtering products:', err);
+      }
+    });
   }
 
   resetFilters() {
     this.selectedBrands = [];
     this.selectedMinPrice = this.minPrice;
     this.selectedMaxPrice = this.maxPrice;
+    this.sortBy = 'featured';
     this.applyFilters();
   }
 
