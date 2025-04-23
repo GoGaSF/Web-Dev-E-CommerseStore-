@@ -1,0 +1,10 @@
+<div class="cart">
+    <h2>Cart</h2>
+    <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+      <p>{{ item.name }} — {{ item.price }}$ × {{ item.quantity }}</p>
+      <button (click)="removeItem(i)">Delete</button>
+    </div>
+    <hr />
+    <h3>Итого: {{ getTotal() }}$</h3>
+  </div>
+  
